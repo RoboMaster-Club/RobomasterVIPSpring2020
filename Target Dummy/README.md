@@ -5,8 +5,7 @@
 ## Development Log 
 ## **Week One (1/17 - 1/24)**
 
-I was given the task to create an exact replica of the dart detection module with a working replica of the dart guiding light. [The Robomaster
-Competition Rules Manual](http://rm-static.djicdn.com/documents/13194/9f9ee6499b6d81577802626475484930.pdf) listed the 3 key parts that makes up the dart detection module: A standard small armor module, a pair of dart detection sensor, and a dart guiding light. With the goals of creating exact replicas, I looked for the functions and dimensions of the three components.
+I was given the task to create an exact replica of the dart detection module with a working replica of the dart guiding light. [The Robomaster Competition Rules Manual](http://rm-static.djicdn.com/documents/13194/9f9ee6499b6d81577802626475484930.pdf) listed the 3 key parts that makes up the dart detection module: A standard small armor module, a pair of dart detection sensor, and a dart guiding light. With the goals of creating exact replicas, I looked for the functions and dimensions of the three components.
 
 ![dart detection module overview](https://github.com/RoboMaster-Club/spring-2020-vip-course/blob/master/Target%20Dummy/Picture4.png)
 
@@ -31,4 +30,23 @@ Following the 520 nm intensity and 80 mm diameter, a proper LED was purchased fr
 ![superbrightled.com picture](https://github.com/RoboMaster-Club/spring-2020-vip-course/blob/master/Target%20Dummy/Picture5.png)
 
 ## **Week Two (1/24 - 1/31)**
+
+With the proper dimensions in place, I am now able to CAD out an exact replica in SolidWorks. Week two was used to assemble a rough replica of the dart detection module based on the image provided in week one.
+
+1. Standard Small Armor Module
+
+   With the proper dimension provided in week one, a rough replica was CADDed in solidworks, foregoing the LED on the sides of the plate. Four counterbore hole is placed on the surface of the armor module so that the surface of the module doesn't have any screws sticking out of it. The four holes are for four m3 screws, binding it to the frame and achieving the proper angle.
+
+1. Dart detection sensor
+
+   The dart detection sensor lacks documented dimensions or IR sensor specifications. Thus a rough estimate was used to create a dumb down replica.
+
+1. Dart Guiding Light 
+
+   The dart guiding light was roughly estimated to be 80 mm in diameter (estimated in week one). A led with similar diameter and intensity (520 nm) was purchased from [superbrightled.com](https://www.superbrightleds.com/cat/led-halo-rings/) and a housing unit was CADDed around the purchased LED.
+
+1. Frame
+
+   Since the dart guiding light, the dart detection sensor, and the dart guiding light are all angled from ground level, a frame was necessary in order to place the three components in proper orientation.
+
 
