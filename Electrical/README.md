@@ -13,10 +13,20 @@ After placing the appropriate power hardware in the schematic, I then had to sea
 
 The next part was to find a suitable IMU for acceleration and gyro measurements. I first went to adafruit and sparkfun to find what breakout boards they had for IMUs. I wanted to find an IMU that only had the measurements that I needed and nothing else to keep it simple and cheap. I found the [LSM6DS3](https://www.st.com/content/ccc/resource/technical/document/datasheet/group0/2e/84/27/34/60/8d/49/f2/DM00237513/files/DM00237513.pdf/jcr:content/translations/en.DM00237513.pdf) which provides 3D digital accelerometer and a 3D digital gyroscope. Using sparkfun's eagle files found on their [product page](https://www.sparkfun.com/products/13339), I was able to add the sensor to my schemtic with the appropirate components to power it.
 
-The last 
+I decided that I would use small jst connectors ([like this one](https://www.digikey.com/product-detail/en/jst-sales-america-inc/SM03B-GHS-TB(LF)(SN)/455-1565-1-ND/807833)) to connect the servos and battery. I then searched for a battery to power the dart while in flight. Since the stm32 and the IMU run off of 3.3v, a battery around that voltage would be preferred, but not manditory since the voltage could be regulated. I saw several 3.7V lithium ion batteries that were under the 4Wh limit set by the competition rules. Since the time of flight will be short (around 5 seconds) I decided that a small battery would be better for the weight limit. I found a selection of lithium ion batteries in the 300 to 500 mAh output range that were under 20 grams such as this [one](https://www.digikey.com/product-detail/en/sparkfun-electronics/PRT-13851/1568-1493-ND/6605199).
 
 Schematic
 ![Schematic](./src/update2/schematic.PNG)
+
+#### Goals For Next Week
+
+Since the team's meeting about what was done this week and what we are going to prioritize, I have been moved from creating a custom PCB for the time being until we decide on what we want hardware wise on the dart. We also want to focus on getting a prototype out as fast as possible. I am tasked with using an arduino nano with an IMU to drive servos based on the measurements of the imu.
+
+My tasks are as follows:
+
+* Research and find stabilization code that uses input from an IMU in order to keep a plane (or other flying object) level
+* Get the IMU and servos working on the arduino nano
+* Have a working prototype that could could be put into a prototype dart body and, with some tweaking, be able to be tested
 
 ### Week 1 (1/19 - 1/26)
 
