@@ -36,17 +36,25 @@ With the proper dimensions in place, I am now able to CAD out an exact replica i
 1. Standard Small Armor Module
 
    With the proper dimension provided in week one, a rough replica was CADDed in solidworks, foregoing the LED on the sides of the plate. Four counterbore hole is placed on the surface of the armor module so that the surface of the module doesn't have any screws sticking out of it. The four holes are for four m3 screws, binding it to the frame and achieving the proper angle.
+   ![small_armor_module](https://github.com/RoboMaster-Club/spring-2020-vip-course/blob/master/Target%20Dummy/CAD_screenshot/sensor_plate.PNG)
 
 1. Dart detection sensor
 
    The dart detection sensor lacks documented dimensions or IR sensor specifications. Thus a rough estimate was used to create a dumb down replica.
+   ![IR_sensor](https://github.com/RoboMaster-Club/spring-2020-vip-course/blob/master/Target%20Dummy/CAD_screenshot/IR_sensor_picture.PNG)
 
 1. Dart Guiding Light 
 
    The dart guiding light was roughly estimated to be 80 mm in diameter (estimated in week one). A led with similar diameter and intensity (520 nm) was purchased from [superbrightled.com](https://www.superbrightleds.com/cat/led-halo-rings/) and a housing unit was CADDed around the purchased LED.
+   ![dart_led](https://github.com/RoboMaster-Club/spring-2020-vip-course/blob/master/Target%20Dummy/CAD_screenshot/Guiding_light_picture.PNG)
 
 1. Frame
 
    Since the dart guiding light, the dart detection sensor, and the dart guiding light are all angled from ground level, a frame was necessary in order to place the three components in proper orientation.
+![frame](https://github.com/RoboMaster-Club/spring-2020-vip-course/blob/master/Target%20Dummy/CAD_screenshot/Frame_picture.PNG)
 
+With all the part in place, all parts are first assembled in SolidWorks.
+![assembly_cad](https://github.com/RoboMaster-Club/spring-2020-vip-course/blob/master/Target%20Dummy/CAD_screenshot/Assembly_picture.PNG)
+
+Then, each part is printed using PLA and assembled using m3 screws.
 
