@@ -58,3 +58,17 @@ With all the part in place, all parts are first assembled in SolidWorks.
 
 Then, each part is printed using PLA and assembled using m3 screws.
 
+## **Week Three (2/1 - 2/8)**
+
+The goal of this week is to plan out and fabricate if possible, a 800 mm tall stand as per the specification given by Robomaster
+
+With both the light nature of the "missile" and the lack of material in mind, the idea is to use a single wooden beam to support the light body frame of the target dummy. Since the four legs of the body does not integrate well with a wooden beam, a support structure was CADed to integrate a wooden beam to the main body frame. 
+
+The four rectangular cuts are meant for the four legs of the main body frame, and the center cut is designed to hold the cross section of a 30mm by 30mm wooden beam. Four m4 holes are placed in the center for nail placements, and thus should provide enough structural stability for the target dummy structure.
+
+On the bottom of the 30mm by 30mm wooden beam, 4 triangular legs are used to create a stand for the target dummy
+
+With all the proper dimensions in place, the goal for week four is to head to BDIC and fabricate the 30 by 30 beam and the 4 leg stand 
+
+
+
