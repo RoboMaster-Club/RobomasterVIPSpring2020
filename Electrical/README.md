@@ -5,6 +5,10 @@
 
 ## Updates
 
+### Week 4 (2/9 - 2/16)
+
+
+
 ### Week 3 (2/2 - 2/9)
 
 My task this week is to research and implement code that will take measurements from an IMU and control servos in order to simulate the dart's response. I first had to figure out how to get data from the IMU I was given. The IMU is the [MPU-9250](https://www.invensense.com/products/motion-tracking/9-axis/mpu-9250/) breakout board. The microcontroller is the arduino nano and the two servos are SG90 micro servos. I first tried to look for stabilization code used for an arduino nano controlled gimbal with servos, but my search came dry with only a few examples that used the IMU I had and none of them were very well documented. I decided to look for example code for the IMU just to get some data out from it and put on the serial monitor. I found sparkfun's example code and library [here](https://github.com/sparkfun/SparkFun_MPU-9250_Breakout_Arduino_Library/blob/master/examples/MPU9250BasicAHRS_I2C/MPU9250BasicAHRS_I2C.ino). I uploaded the example code and after changing the address of the IMU in the code that I found using an [I2C scanner](https://playground.arduino.cc/Main/I2cScanner/), I saw a lot of data output to the console.
