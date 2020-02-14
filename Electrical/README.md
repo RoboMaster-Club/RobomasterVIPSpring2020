@@ -7,6 +7,15 @@
 
 ### Week 4 (2/9 - 2/16)
 
+I was tasked with getting the position of the dart from the launch point by using data from the accelerometer. After a bit of research, I decided that it would not be a good idea. I explain more about it at the end of my update report from last week. Since I abandoned that objective, I decided that making more progress on the custom pcb would be a good idea. My current schematic uses the stm32f4 as the microcontroller, but I am not confident in making that decision for the rest of the team. I decided to make another schematic using the atmega328p as the micro.
+
+|Device|Voltage (V)|Power Draw (mA)|Watts|
+|----------|------|----------|------|
+|atmega328p|	3.3	|1.5|	0.00495|
+|pixy2|	5	|140|	0.7|
+|lsm6ds3|	3.3	|1	|0.0033|
+|Servo (3)|	5|200|	1|
+|DTD|	?	|?	|?|
 
 
 ### Week 3 (2/2 - 2/9)
