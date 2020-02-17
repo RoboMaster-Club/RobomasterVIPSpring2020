@@ -7,7 +7,7 @@
 
 ### Week 4 (2/9 - 2/16)
 
-I was tasked with getting the position of the dart from the launch point by using data from the accelerometer. After a bit of research, I decided that it would not be a good idea. I explain more about it at the end of my update report from last week. Since I abandoned that objective, I decided that making more progress on the custom pcb would be a good idea. My current schematic uses the stm32f4 as the microcontroller, but I am not confident in making that decision for the rest of the team. I decided to make another schematic using the atmega328p as the micro.
+I was tasked with getting the position of the dart from the launch point by using data from the accelerometer. After a bit of research, I decided that it would not be a good idea. I explain more about it at the end of my update report from last week. Since I abandoned that objective, I decided that making more progress on the custom pcb would be a good idea. My current schematic uses the stm32f4 as the microcontroller, but I am not confident in making that decision for the rest of the team. I decided to make another schematic using the atmega328p as the micro. I also decided to make a table of all the components on the dart and their power consumption. To find the voltages and draw, I looked at the datasheets for the atmega, pixy2, and the IMU. I was not able to find a data sheet for the servos, but after some research I concluded that the servos would draw about 200 mA between all of them since they would not be under high load. I did not know the power draw of the dart trigger device, but my guess is that it is minimal. Since the dart will only have to be on for less than 30 minutes and only flying for 5 seconds, a small battery will work just fine. A capacitor would require a constant power connection to the dart launcher and would also require an outside contact on the dart.
 
 |Device|Voltage (V)|Power Draw (mA)|Watts|
 |----------|------|----------|------|
@@ -17,6 +17,11 @@ I was tasked with getting the position of the dart from the launch point by usin
 |Servo (3)|	5|200|	1|
 |DTD|	?	|?	|?|
 
+After the team meeting on friday, I got a clearer message of what we want to use onthe dart. It was decided that the atmega328p would be the microcontroller on the dart. The body of the dart was also changed from a lifting body to a more missile shaped projectile. This would change the dimensions of the electronics board, but it will still have enough space to fit everything. Based on the suggestions of one of the faculty advisors, we are going to try and switch from servos to a magnetic actuator. A magnetic actuator is a magnet placed in a coil of wire. Driving current through the wire will cause a magnetic field that will force the magnet to rotate in the direction of the magnetic field. The field can be reversed by switching the polarity of the coil. After doing some searching online, I could not find a vendor for magnetic actuators that would arrive in a reasonable amount of time. I did, however, find multiple [tutorials](https://hackaday.com/2018/04/17/diy-magnetic-actuator-illustrated-and-demonstrated/) on how to make them.
+
+Goals for Next Week:
+* Make DIY magnetic actuator and test it
+* Start pcb design based on new dart body using atmega and magnetic actuators
 
 ### Week 3 (2/2 - 2/9)
 
