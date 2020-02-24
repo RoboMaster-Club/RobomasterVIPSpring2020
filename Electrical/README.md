@@ -15,6 +15,8 @@ Using the guide that I found last week to make a magnetic actuator, I attempted 
 
 After the team meeting on friday, another team member and I wanted to try to make a working prototype actuator based on the design from the guide. We 3D printed the actuator which was made up of a cylinder with another piece with pegs that held the magnet within it. The coil was wrapped around the cylinder using a drill to make a tight coil. We tested the actuator by hooking it directly up to a power supply with 1 volt output. At 1 volt, the actuator drew half an amp. The state of the actuator could be controlled by switching the polarity. The actuator was able to switch quickly and with reasonable force.
 
+![test](./src/update5/test.gif)
+
 Goals For Next Week:
 * Make another actuator prototype with new design, smaller magnets, and new motor driver
 * Keep schematic updated and make changes as needed
