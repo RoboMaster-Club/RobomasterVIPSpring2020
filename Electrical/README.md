@@ -11,10 +11,13 @@ At the start of this week, I ordered the parts for the next magnetic actuator pr
 
 After getting the new magnets, a new prototype for the actuator was designed and printed. The new design is smaller and is closer to the size that we will want it to be to go on the dart. After the magnets were placed in the rotating part of the actuator and the wire coiled around the outside, the tests were ready to begin. The code I used to test the actuator can be found [here](https://github.com/RoboMaster-Club/spring-2020-vip-course/blob/master/Electrical/driverTest/driverTest.ino). I conducted test on both the old and new prototype. I first tested moving the actuator from one side to the other. Both the new and old prototype were able to do this quickly and with reasonable force. The second test used magnets on the outside along with changing the pwm signal to control the angle of the actuator. I was able to control the angle, but the movement between angles was not perfectly smooth and the actuator would sometimes get stuck. This is most likely due to the magnets on the outside not being perfectly straight or held in place. There is also no bearing on the inside of the actuator and the coil is not perfectly wrapped. Smoother movement was able to be done by increasing the voltage put through the coil, but it was still not perfect. The new prototype drew 0.8 amps at 2 volts and just over 1 amp at 2.5 volts. It also would get hot when run for longer than 30 seconds at 2.5 volts, but could run for a prolonged period of time without getting hot at 2 volts. These findings raise some concerns for my plans to run the actuators at the battery voltage (3.7 volts). The heat is not an issue because of the short flight time, but the current motor driver has a current limit of 1.2 amps per output channel. More tests will have to be done with the final design of the actuator to determine if a buck converter will be needed to drive the actuator.
 
+Old design side to side
 ![test 1](./src/update6/test1.gif)
 
+Old design angle control
 ![test2](./src/update6/test2.gif)
 
+New design angle control
 ![test3](./src/update6/test3.gif)
 
 ### Week 5 (2/17 - 2/23)
