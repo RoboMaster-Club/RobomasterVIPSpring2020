@@ -6,6 +6,72 @@
 
 ## Updates
 
+### Week 8 and 9 (3/9 - 3/22)
+
+#### Previous Goals:
+Last time my primary goal was to develop a guiding light detection script by using a camera and changing parameters on that camera like brightness. Currently, the primary issue with past guiding light detection scripts was that the green guiding light appears white through the camera feed. Changing the camera parameters may ensure that the green guiding light appears green. All of this was intended to be done on a raspberry pi 0 with a camera module. However due to Purdue’s evacuation notice, I do not possess those things. As an alternative, I have used a Logitech webcam to develop the object detection script in the same way. The Logitech webcam cannot be used for the final product as it is too big, but it will suffice for developing the object detection algorithm.
+
+#### Progress:
+To ensure that the light appear green through the camera feed, I tested 5 different camera parameters, brightness, contrast, saturation, gain, and exposure. Brightness is how bright the image appears. Contrast is the amount of separation between light and dark objects. So, a high contrast value means dark objects appear darker and light objects appear lighter. Saturation is the amount of separation between colors. So, a low saturation value will mean that the image will appear grayscale. Exposure is the amount of light that reaches the camera. A high exposure value means that less light reaches the camera. I’m not entirely sure what gain is.
+
+Through experimentation, I found that a combination of low brightness, low gain, and high exposure (Brightness = 0, Gain = 0, Exposure = 0) produced the best results to ensure that the guiding light appears green and not white. Here are the results where the left side shows where the green HSV pixels are (after a closing filter was applied), and the right side shows the unedited image:
+
+(Brightness = 0, Gain = 0, Exposure = 0) <br/>
+<img src="./images/LightExposureBrightnessGain.PNG" width="400">
+
+(Brightness = 128, Gain = 0, Exposure = 0) <br/>
+<img src="./images/LightExposureGain.PNG" width="400">
+
+(Brightness = 0, Gain = 44, Exposure = 0) <br/>
+<img src="./images/LightBrightnessExposure.PNG" width="400">
+
+(Brightness = 0, Gain = 0, Exposure = -6) <br/>
+<img src="./images/LightBrightnessGain.PNG" width="400">
+
+From this, it appears that the exposure parameter is primarily responsible for fixing the appearance of the dart guiding light. Additionally, changes to contrast and saturation by themselves did not produce better results.
+
+Now that the appearance of the guiding light is fixed, the light can be detected. For the script, first thresholding is used to get guiding light mask or getting only the green pixels of the image in the HSV color space. Next, morphology is applied. I found that a closing filter works best given that the mask is a blob with small holes. See [this](https://docs.opencv.org/trunk/d9/d61/tutorial_py_morphological_ops.html) for a better explanation. Finally, the script fits a circle to the mask. I found two OpenCV algorithms to do this, HoughCircles() and the use of findContours() with minEnclosingCircle(). They are functionally similar, so I decided to decide between them based on performance. Through testing I found that the find contours method runs 0.00115 seconds per frame and the Hough circles method runs 0.02109 seconds per frame on average. Based on this, I choose to use the find contours method.
+
+Here are the results of the script where the left part shows the image in the HSV color space along with a red contour/outline, the middle part shows the green pixels (in the HSV color space) are after a applied closing filter, and the right part shows the unedited image with fitted blue circle.
+
+(at 5m away) <br/>
+<img src="./images/LightDetection5m.PNG" width="800">
+
+(at 10m away) <br/>
+<img src="./images/LightDetection10m.PNG" width="800">
+
+Overall, the script is very consistent and should be sufficient for our needs. Still, the script parameters/ranges/constants will likely be to be tuned in the location that the dart will be used in.
+
+My primary goal for this week would be to coordinate with the other VIP team members to see what we will be able to do now that we cannot meet in person. After that, I plan to develop a test script for the dart gimbal so we can tune our PID constants if possible. Then that test script would need to be modified to run on the dart. Similarly, I plan to develop a test script for the controls of the dart and then later modify it so that it runs on the dart.
+
+#### Current Goals:
+
+### Week 6 (2/23 - 2/29)
+
+#### Previous Goals:
+Last week I prepared a variety of topics to discuss during the midterm presentation. This would help the vision team to get feedback on our solutions to the dart aiming and object detection problems. First, a distance estimation solution to get the darts distance to the target was needed. Second, research on how to fix the issue of dart guiding light appearing overexposed in the camera feed. For this I researched bandpass filters and polarized filters.
+
+#### Progress:
+For a distance estimation solution, I developed a simple Arduino script to do this based on [this](https://www.pyimagesearch.com/2015/01/19/find-distance-camera-objectmarker-using-python-opencv/) source. The script required the calculation of a constant which the source called the focal length. This ended up being 262.37 for the Pixy2 that I used and the object width of the light I measured at 9.3 cm. With this the equation to calculate what I am calling the forward distance to the dart guiding light given the width in pixels of the detected object in the camera is distance = (focalLength * objectWidth) / blockWidth. Here are the results of this.
+
+<img src="./images/distanceEstimationGraph.png" width="400">
+<img src="./images/distanceEstimationGraphLowWidth.png" width="400">
+<img src="./images/dartSketch.jpg" width="400">
+<img src="./images/lightDetectionAt10m.PNG" width="400">
+
+ With this code the forward distance can be calculated, which to be clear is not the direct distance from the camera to the dart guiding light, but it can be calculated. If the horizontal distance, which is defined in the picture, is needed, then the yaw angle of the dart and the camera relative to the dart will be needed.
+ 
+It is worth to point out that according to the equation if the detected blob is 2 or 3 pixels wide, the distance will be at 10 meters. However, as shown above the detected blob at 10 meters seems to be larger than 2 or 3 pixels due to the ambience of the light. Still, as discussed in the presentation (2/27), it would be more effective to use time as an indicator of how far the dart is.
+
+During the presentation (2/27), we concluded that the pixycam’s object detection was not stable enough to get consistent or reliable results. It was suggested that we use a raspberry pie 0 along with any sort of camera and OpenCV. The raspberry pie hardware would permit one less microcontroller to be on the dart, and OpenCV would give us more freedom in how we decide to go about object detection. It was also suggested that the reason that the dart guiding light appeared white was that the brightness of the camera used was too high. More testing will need to be done with this.
+
+Next, I looked into bandpass filters which would filter out most other non-green light. So, even if the dart guiding light appeared white, we would not falsely detect other white lights. This seems like a good solution, but bandpass filters seem expensive to be on a breakable dart. The cheapest one I found was $45 from [here](https://www.omegafilters.com/product/3417). However, after talking to Kevin, the electrical lead, we may be able to get green bandpass filters for as little as $4. This would be a good solution if we are not able to fix the overexposure issue with the camera brightness.
+
+Finally, I looked into polarized filters as suggested by Noah. If unpolarized light (e.g. the light from the dart guiding light) goes through a polarized filter, the intensity will decrease by half. Again, this is this will be something worth trying if we are not able to fix the overexposure issue with the camera brightness. The filters can be bought [here](https://www.teachersource.com/product/1048/light-filters?gclid=Cj0KCQiA1-3yBRCmARIsAN7B4H3jUan_oFyZWBgL7Dy6hkjBaHuurcmXplowTb08T5VA7xymNzTKqKIaAkElEALw_wcB).
+
+#### Current Goals:
+The primary goal for this week to set up Henry’s raspberry pie 0 to perform object detection. For me, this will involve installing OpenCV and developing an object detection script using OpenCV. The other goal would be to find out how to lower the brightness on the raspberry pie 0 camera. Then we would need to lower the brightness on the camera and see how the dart guiding light looks.
+
 ### Week 5 (2/16 - 2/23)
 
 #### Previous Goals:
