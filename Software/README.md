@@ -42,9 +42,9 @@ Here are the results of the script where the left part shows the image in the HS
 
 Overall, the script is very consistent and should be sufficient for our needs. Still, the script parameters/ranges/constants will likely be to be tuned in the location that the dart will be used in.
 
-My primary goal for this week would be to coordinate with the other VIP team members to see what we will be able to do now that we cannot meet in person. After that, I plan to develop a test script for the dart gimbal so we can tune our PID constants if possible. Then that test script would need to be modified to run on the dart. Similarly, I plan to develop a test script for the controls of the dart and then later modify it so that it runs on the dart.
-
 #### Current Goals:
+
+My primary goal for this week would be to coordinate with the other VIP team members to see what we will be able to do now that we cannot meet in person. After that, I plan to develop a test script for the dart gimbal so we can tune our PID constants if possible. Then that test script would need to be modified to run on the dart. Similarly, I plan to develop a test script for the controls of the dart and then later modify it so that it runs on the dart.
 
 ### Week 6 (2/23 - 2/29)
 
