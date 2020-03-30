@@ -6,6 +6,27 @@
 
 ## Updates
 
+### Week 10 (3/23 - 3/29)
+
+### Previous Goals:
+My primary goal this week was to continue develop of the algorithms that will be run on the dart and coordinate with the rest of the team about how the code will interface with the rest of the dart. So, this week it was my goal to develop the PID control code for the dart fins. I also planned to continue experimenting with the object detection algorithm to improve performance. 
+
+### Progress
+First, I retested the object detection algorithm in a different location than last week. A different range to find the green pixels was used due to the different light conditions. Here was the result of the testing:
+
+<img src="./images/ToManyCircles.PNG" width="800">
+
+Instead of just fitting one circle from the given contours, the algorithm fits many circles. To fix this, I decided to only use the largest fit circle as the outer (and largest) contour of the guiding light is what we aim to detect. Here are the results with the new changes:
+
+<img src="./images/OneCircle.PNG" width="800">
+
+As mentioned by Kevin during the 3/27 meeting, the brightness of the guiding light will depend on how far the camera is from the guiding light. So, camera parameters may need to be dynamically changed to accommodate this. To test this, I edited the brightness, gain, and exposure parameters when the camera was at 1 and 4 meters away from the guiding light. I found that any parameter changes from their original values always resulted in a worse performance no matter what distance the camera was at. The H HSV value in the green pixels always decreased becoming less green. Additionally, the white ring in the guiding light was larger leaving less green pixels. So, I have decided to keep the parameters at their minimum/maximum values (brightness = 0, gain = 0, and exposure = 0).
+
+Finally, I developed the PID control code. First, I created a fin class with a pos (position) variable to model the physical dart fins and their position. For now, I have an arbitrary range for the fin position as the fin actuators are still in development. For the PID code, I used [this](http://robotsforroboticists.com/pid-control/) site as a reference. In cases where the guiding light is not able to be detected, the algorithm currently does not change the fin position and keeps track of time between the previous and next input for the next calculation. To send the guiding light location to the stm32, I talked to Henry as we decided to use I2C as the pi would be able to get data form the IMU as well. 
+
+### Current Goals:
+My general goals for next week would be to continue testing the object detection algorithm and collaborating with the rest of the team to complete the control algorithm. During testing I found that the object detection algorithm runs at around 0.033 seconds per frame or 30 frames per second. This could be improved by implementing the algorithm in C++ or by editing the algorithm itself, which I plan to do.
+
 ### Week 8 and 9 (3/9 - 3/22)
 
 #### Previous Goals:
