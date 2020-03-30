@@ -21,7 +21,7 @@ while True:
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
     # Thresholding
-    lower = np.array([57, 140, 0])
+    lower = np.array([50, 140, 0])
     upper = np.array([94, 255, 156])
     mask = cv2.inRange(hsv, lower, upper)
 
@@ -34,17 +34,26 @@ while True:
 
     cv2.drawContours(hsv, contours, -1, (0, 0, 255), 3)
 
+    maxRadius = -1
     for contour in contours:
         (x,y), radius = cv2.minEnclosingCircle(contour)
-        center = (int(x), int(y))
+        x = int(x)
+        y = int(y)
         radius = int(radius)
-        cv2.circle(frame, center, radius, (255,0,0), 2)
+
+        if radius > maxRadius:
+            center = (x, y)
+            maxRadius = radius
+
+    if maxRadius != -1:
+        cv2.circle(frame, center, maxRadius, (255,0,0), 2)
 
     cv2.imshow('frame', frame)
     cv2.imshow('hsv', hsv)
     cv2.imshow('mask', mask)
 
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    key = cv2.waitKey(1)
+    if key & 0xFF == ord('q'):
         break
 
 cv2.destroyAllWindows()

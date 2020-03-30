@@ -62,7 +62,22 @@ while True:
     cv2.imshow('frame', frame)
     cv2.imshow('hsv', hsv)
 
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    key = cv2.waitKey(1)
+    if key & 0xFF == ord('q'):
         break
+    elif key & 0xFF == ord('w'):
+        cap.set(CV_CAP_PROP_BRIGHTNESS, cap.get(CV_CAP_PROP_BRIGHTNESS)+1)
+    elif key & 0xFF == ord('s'):
+        cap.set(CV_CAP_PROP_BRIGHTNESS, cap.get(CV_CAP_PROP_BRIGHTNESS)-1)
+    elif key & 0xFF == ord('e'):
+        cap.set(CV_CAP_PROP_GAIN, cap.get(CV_CAP_PROP_GAIN)+1)
+    elif key & 0xFF == ord('d'):
+        cap.set(CV_CAP_PROP_GAIN, cap.get(CV_CAP_PROP_GAIN)-1)
+    elif key & 0xFF == ord('r'):
+        cap.set(CV_CAP_PROP_EXPOSURE, cap.get(CV_CAP_PROP_EXPOSURE)+1)
+    elif key & 0xFF == ord('f'):
+        cap.set(CV_CAP_PROP_EXPOSURE, cap.get(CV_CAP_PROP_EXPOSURE)-1)
+
+    print(cap.get(CV_CAP_PROP_BRIGHTNESS), cap.get(CV_CAP_PROP_GAIN), cap.get(CV_CAP_PROP_EXPOSURE), end='\r')
 
 cv2.destroyAllWindows()
