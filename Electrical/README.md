@@ -5,6 +5,10 @@
 
 ## Updates
 
+### Week 11 (3/29 - 4/5)
+
+Since we have decided to use the stm32 and the raspberry pi, a way to communicate between the two is needed. I2C seems like a good choice because it would allow the raspberry pi to use one protocol to communicate with the accelorometer and the stm32. In the I2C system, the master would be the raspberry pi and the stm32 and any other sensor would be the slave devices. The raspberry pi would first initialize any sensors on board and send any initial data to the stm32. The commands to the stm32 would be sent by the pi and stored in some of the data registers on the stm32.
+
 ### Week 9 (3/15 - 3/22)
 
 Given the new situation that we are in, I have decided to prioritize what I think can be realistically done while not on campus and better prepare for a testing prototype to be completed early next fall semester. Currently, I am tasked with creating the magnetic actuators and making a testing interface for the test rig. I am not confident that I can produce the coils needed for the magnetic actuator at home, at least of the quality that would be acceptable for a testing prototype. I already have actuators that I could test the electronics with and could create more if needed, but not for flight test purposes. I could make progress on the research and development of the methods to create the magnetic actuators. The current plan is to either 3D print the coil wrapping base and wrap it with tape or 3d print a mold to make it out of wax.
