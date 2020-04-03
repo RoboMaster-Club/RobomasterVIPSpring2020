@@ -9,6 +9,9 @@
 
 Since we have decided to use the stm32 and the raspberry pi, a way to communicate between the two is needed. I2C seems like a good choice because it would allow the raspberry pi to use one protocol to communicate with the accelorometer and the stm32. In the I2C system, the master would be the raspberry pi and the stm32 and any other sensor would be the slave devices. The raspberry pi would first initialize any sensors on board and send any initial data to the stm32. The commands to the stm32 would be sent by the pi and stored in some of the data registers on the stm32.
 
+#### Testing STM32 I2C Slave Recieving
+
+
 
 
 ### Week 9 (3/15 - 3/22)
