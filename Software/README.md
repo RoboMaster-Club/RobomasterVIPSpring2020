@@ -6,7 +6,7 @@
 
 ## Updates
 
-### Week 10 (3/30 - 4/5)
+### Week 11 (3/30 - 4/5)
 
 #### Previous Goals:
 My goals last week were to continue testing the object detection algorithm in order to improve the performance and speed of the algorithm. Another goal was to collaborate with the rest of the team to integrate the object detection and control code with the other systems of the dart.
