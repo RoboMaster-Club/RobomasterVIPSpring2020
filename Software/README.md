@@ -6,12 +6,30 @@
 
 ## Updates
 
+### Week 10 (3/30 - 4/5)
+
+#### Previous Goals:
+My goals last week were to continue testing the object detection algorithm in order to improve the performance and speed of the algorithm. Another goal was to collaborate with the rest of the team to integrate the object detection and control code with the other systems of the dart.
+
+#### Progress:
+Overall, I found out several things while experimenting and improving with the object detection algorithm. First, the primary reason why the algorithm took about 0.03 seconds per frame was due to the time it takes for the code to read an image from the camera. Excluding the time it takes to get the image, the final Python version of the code runs at about 0.004 seconds per frame.
+
+Second, to make the algorithm faster, I implemented it in C++ which the final version runs at about 0.002 seconds per frame excluding the time it takes to read the image. So, this saves about 0.002 second per frame. As a side note, the PID control code was implemented in C++ as well.
+
+Third, I experimented with morphology which is used to change the shape of the set of green pixels that were found. Overall, morphology did not affect the end output, but it does greatly affect the time of the algorithm. If a larger kernel is used, then the algorithm will take longer. For example, using a 11 x 11 kernel instead of a 3 x 3 kernel will increase the time of the algorithm by about 0.007 seconds. Because this did not affect the end output, I decided to go with a small 3 x 3 kernel to save time.
+
+Finally, I experimented with other parts of the algorithm including adding the approxPolyDP() function to approximate the contour shapes, changing the contour retrieval mode, and changing the contour approximation modes. See the OpenCV approxPolyDP() and findContours() functions for more details. These changes did not significantly impact the time or output of the algorithm.
+
+#### Current Goals:
+Like last week my primary goal will be to collaborate with the rest of the team to integrate the object detection and control code with the other systems of the dart. This will include sending information from the raspberry pi zero to the stm32 and making sure the new C++ will work well on the raspberry pi zero. Additionally, I will begin looking into developing code to enable the team to tune PID values on the test rig.
+
+
 ### Week 10 (3/23 - 3/29)
 
-### Previous Goals:
+#### Previous Goals:
 My primary goal this week was to continue develop of the algorithms that will be run on the dart and coordinate with the rest of the team about how the code will interface with the rest of the dart. So, this week it was my goal to develop the PID control code for the dart fins. I also planned to continue experimenting with the object detection algorithm to improve performance. 
 
-### Progress
+#### Progress
 First, I retested the object detection algorithm in a different location than last week. A different range to find the green pixels was used due to the different light conditions. Here was the result of the testing:
 
 <img src="./images/ToManyCircles.PNG" width="800">
@@ -24,7 +42,7 @@ As mentioned by Kevin during the 3/27 meeting, the brightness of the guiding lig
 
 Finally, I developed the PID control code. First, I created a fin class with a pos (position) variable to model the physical dart fins and their position. For now, I have an arbitrary range for the fin position as the fin actuators are still in development. For the PID code, I used [this](http://robotsforroboticists.com/pid-control/) site as a reference. In cases where the guiding light is not able to be detected, the algorithm currently does not change the fin position and keeps track of time between the previous and next input for the next calculation. To send the guiding light location to the stm32, I talked to Henry as we decided to use I2C as the pi would be able to get data form the IMU as well. 
 
-### Current Goals:
+#### Current Goals:
 My general goals for next week would be to continue testing the object detection algorithm and collaborating with the rest of the team to complete the control algorithm. During testing I found that the object detection algorithm runs at around 0.033 seconds per frame or 30 frames per second. This could be improved by implementing the algorithm in C++ or by editing the algorithm itself, which I plan to do.
 
 ### Week 8 and 9 (3/9 - 3/22)
