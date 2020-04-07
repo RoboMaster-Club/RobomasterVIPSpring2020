@@ -10,9 +10,9 @@
 The team has decided to switch to SPI instead of using i2c because of its speed advantages and because there are only 2 slave devices on the dart. I will now go on a long winded account of how I got spi to work on the stm32 with an arduino as slave because if I dont write this down I am going to forget. I tested both full duplex slave and half duplex recieve only with both hardware nss diasbled and enabled all of them worked. I did not figure out how to do an interrupt with the hardware nss but I was able to simulate slave select by creating a gpio input on PC2 that acted as a slave select. The stm32 will only try and listen when PC2 is held low. To recieve the data sent by the arduino use HAL_SPI_Receive. I had issues with the stm32 reading the sent data incorrectly. I was able to fix this with 2 changes. 
 1. Inserting a small delay (10 microseconds) between the arduino pulling the slave select low and sending the data. 
 2. Setting the number of bytes to recieve in the HAL_SPI_Receive call by 1 more than the number of bytes that you wish to recieve
-3. A relatively small timeout period (100 microseconds) on the HAL_SPI_Receive call.
+3. A relatively small timeout period (50 microseconds) on the HAL_SPI_Receive call.
 
-This ensures that the stm32 will read the data being sent to it completely and correctly. This will cause the SPI recieve function to timout every time it is called, but with a short timeout period this should not effect the speed too much
+This ensures that the stm32 will read the data being sent to it completely and correctly. This will cause the SPI recieve function to timout every time it is called, but with a short timeout period this should not effect the speed too much.
 
 
 ### Week 11 (3/29 - 4/5)
