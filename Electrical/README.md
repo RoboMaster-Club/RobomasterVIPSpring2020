@@ -12,7 +12,7 @@ The team has decided to switch to SPI instead of using i2c because of its speed 
 2. Setting the number of bytes to recieve in the HAL_SPI_Receive call by 1 more than the number of bytes that you wish to recieve
 3. A relatively small timeout period (50 microseconds) on the HAL_SPI_Receive call.
 
-This ensures that the stm32 will read the data being sent to it completely and correctly. This will cause the SPI recieve function to timout every time it is called, but with a short timeout period this should not effect the speed too much.
+This ensures that the stm32 will read the data being sent to it completely and correctly. This will cause the SPI recieve function to timout every time it is called, but with a short timeout period this should not effect the speed too much. The timeout period may have to be increased if the amount of bytes being read is increased by a lot.
 
 
 ### Week 11 (3/29 - 4/5)
