@@ -1,3 +1,6 @@
+
+//! THIS IS NOT THE FULL CODE TO MAKE THIS RUN ON AN STM32, THIS IS ONLY THE MAIN FUNCTION
+
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
@@ -20,6 +23,9 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "i2c.h"
+#include "spi.h"
+#include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -43,7 +49,10 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+HAL_StatusTypeDef i2cStats;
+HAL_StatusTypeDef spiStats;
+unsigned char data[1];
+int pin2;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -66,7 +75,6 @@ int main(void)
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -85,19 +93,66 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  MX_I2C1_Init();
+  MX_SPI2_Init();
   /* USER CODE BEGIN 2 */
-
+  HAL_I2C_StateTypeDef state;
+  HAL_SPI_StateTypeDef spiState;
   /* USER CODE END 2 */
- 
- 
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  *data = 0;
   while (1)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
+	  // i2c
+	  /*
+	  state=HAL_I2C_GetState(&hi2c1);
+	  if(state==HAL_I2C_STATE_READY||state==HAL_I2C_STATE_BUSY_RX)
+	  {
+		  i2cStats =  HAL_I2C_Slave_Receive(&hi2c1, data, 1, 10000);
+	  }
+	  */
+
+	  // spi
+
+	  spiState = HAL_SPI_GetState(&hspi2);
+
+	  if (spiState == HAL_SPI_STATE_READY)
+	  {
+		  if (!HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_2))
+		  {
+			  spiStats = HAL_SPI_Receive(&hspi2, data, 6, 50);
+		  }
+	  }
+
+
+	  if (*data == 0b10101)
+	  {
+		  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_1, GPIO_PIN_SET);
+	  }
+	  else if (*data == 0b01010)
+	  {
+		  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_1, GPIO_PIN_RESET);
+	  }
+
+	  // gpio input test
+	  /*
+	  pin2 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_2);
+	  if (pin2)
+	  {
+		  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_1, GPIO_PIN_SET);
+	  }
+	  else
+	  {
+		  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_1, GPIO_PIN_RESET);
+	  }*/
+
   }
   /* USER CODE END 3 */
 }
@@ -120,7 +175,12 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
+  RCC_OscInitStruct.PLL.PLLM = 8;
+  RCC_OscInitStruct.PLL.PLLN = 168;
+  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+  RCC_OscInitStruct.PLL.PLLQ = 4;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -129,12 +189,12 @@ void SystemClock_Config(void)
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
   {
     Error_Handler();
   }
