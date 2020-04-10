@@ -8,7 +8,7 @@ using namespace std;
 
 class PIDController {
 public:
-	PIDController(double target, double p, double i, double d, bool reversed=false) {
+	PIDController(float target, float p, float i, float d, bool reversed=false) {
 		this->target = target;
 
 		//to reverse output
@@ -26,15 +26,15 @@ public:
 		this->timePrev = chrono::steady_clock::now();
 	}
 
-	double step(double input) {
-		double error = this->target - input;
+	float step(float input) {
+		float error = this->target - input;
 
 		//get time difference in seconds
 		auto timeCurr = chrono::steady_clock::now(); 
-		double delta = (double) chrono::duration_cast<chrono::milliseconds>(timeCurr - this->timePrev).count() / 1000;
+		float delta = (float) chrono::duration_cast<chrono::milliseconds>(timeCurr - this->timePrev).count() / 1000;
 		
-		double integral = this->integralPrev + error * delta;
-		double derivitive;
+		float integral = this->integralPrev + error * delta;
+		float derivitive;
 		if (delta != 0)
 			derivitive = (error - this->errorPrev) / delta;
 		else
@@ -48,10 +48,10 @@ public:
 	}
 
 private:
-	double target;
-	double integralPrev, errorPrev;
+	float target;
+	float integralPrev, errorPrev;
 	chrono::steady_clock::time_point timePrev;
-	double kp, ki, kd;
+	float kp, ki, kd;
 	int reversedValue;
 };
 

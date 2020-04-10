@@ -1,4 +1,5 @@
 #include <algorithm> //min, max
+#include <stdint.h> //int8_t
 
 #ifndef _FIN_H
 #define _FIN_H
@@ -6,22 +7,24 @@
 class Fin {
 public:
 	Fin() {
-		//assumes a position between 100 (up/left) and -100 (down/right)
-		this->pos = 0;
+		//assumes a position between 90 (up/left) and -90 (down/right)
+		pos = 0;
+		maxPos = 90;
+		minPos = -90;
 	}
 
-	void setPos(double pos) {
-		pos = std::min(pos, -100.0);
-		pos = std::max(pos, 100.0);
+	void setPos(int8_t pos) {
+		pos = std::min(pos, minPos);
+		pos = std::max(pos, maxPos);
 		this->pos = pos;
 	}
 
-	int getPos() {
+	int8_t getPos() {
 		return this->pos;
 	}
 
 private:
-	double pos;
+	int8_t pos, maxPos, minPos;
 };
 
 #endif
