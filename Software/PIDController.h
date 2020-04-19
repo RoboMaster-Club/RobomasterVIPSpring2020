@@ -47,6 +47,14 @@ public:
 		return this->reversedValue * (this->kp*error + this->ki*integral + this->kd*derivitive);
 	}
 
+	void setTarget(float value) {
+		target = value;
+	}
+
+	float getTarget() {
+		return target;
+	}
+
 private:
 	float target;
 	float integralPrev, errorPrev;
