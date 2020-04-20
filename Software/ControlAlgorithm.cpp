@@ -3,6 +3,7 @@
 
 #include <opencv2/opencv.hpp>
 #include <chrono>
+#include <vector>
 
 using namespace cv;
 using namespace std;
@@ -13,7 +14,7 @@ int main() {
 
     // define a set of positions that the dart should be at at time 0, delta, 2*delta, ... from launch
     const float delta = 0.1; // seconds
-    const Point trajectory[] = {Point(0, 0, 0), Point(1, 1, 1), Point(2, 2, 2), Point(3, 3, 3)};
+    const vector<Point3f> trajectory {Point3f(0, 0, 0), Point3f(1, 1, 1), Point3f(2, 2, 2), Point3f(3, 3, 3)};
 
     auto timeStart = chrono::steady_clock::now();
 

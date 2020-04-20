@@ -27,6 +27,17 @@ public:
 		upper = Scalar(94, 255, 156);
 	}
 
+    /*
+     * Gets the current image from the dart's camera and uses OpenCV to
+	 * find the position of the guiding light in the image.
+     * 
+     * @param centerResult Reference to the variable that will contain
+	 * position of the guiding light in the image if the guiding light
+	 * is found. If the light is not found, the centerResult will contain
+	 * non-meaningful data.
+	 *
+	 * @returns True if the guiding light was found, false if not.
+     */
 	bool getLightPosition(Point2f& centerResult) {
 		Mat frame, hsv, mask, kernel;
 		vector<vector<Point>> contours;

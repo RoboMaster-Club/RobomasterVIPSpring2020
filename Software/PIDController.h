@@ -26,6 +26,13 @@ public:
 		this->timePrev = chrono::steady_clock::now();
 	}
 
+
+    /* 
+     * Go through one iteration of the PID controller.
+     * 
+     * @param input The current state of the system.
+	 * @returns The output needed to get the system closer to the target
+     */
 	float step(float input) {
 		float error = this->target - input;
 
