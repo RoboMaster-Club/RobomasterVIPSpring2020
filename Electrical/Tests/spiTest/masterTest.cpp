@@ -3,7 +3,7 @@
 
 int main(void)
 {
-	const int stmPin = 4;
+	const int stmPin = 0;
 	unsigned char dataOn[1];
 	unsigned char dataOff[1];
 
