@@ -21,23 +21,23 @@ int main(void)
 
 	// reset the BNO055 by sending 0x20 to the system trigger register 0x3F
 	*config = 0x20;
-	wiringPiI2CWriteReg8(bno, 0x3F, config);
+	wiringPiI2CWriteReg8(bno, 0x3F, *config);
 	delay(1000); // wait for one second while sensor reboots
 
 	// set to normal power mode by sending 0x00 to the power mode register 0x3E
 	// I am pretty sure this is not needed
 	*config = 0x00;
-	wiringPiI2CWriteReg8(bno, 0x3E, config);
+	wiringPiI2CWriteReg8(bno, 0x3E, *config);
 	delay(50);
 
 	// set trigger register back to normal (I am pretty sure this is not needed as well)
 	*config = 0x00;
-	wiringPiI2CWriteReg8(bno, 0x3F, config);
+	wiringPiI2CWriteReg8(bno, 0x3F, *config);
 	delay(50);
 
 	// set operating mode to NDOF (outputs euler angles) 0x0C -> 0x3D
 	*config = 0x0C;
-	wiringPiI2CWriteReg8(bno, 0x3D, 0x0C);
+	wiringPiI2CWriteReg8(bno, 0x3D, *config);
 	delay(50);
 
 	// infinite loop for getting data
